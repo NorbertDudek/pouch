@@ -12,20 +12,13 @@ local.properties
 # --- Firefox add-on ---
 node_modules/
 web-ext-artifacts/
+dist/
 *.xpi
 .amo-upload-uuid
 
-# --- Android ---
-android/.gradle/
-android/build/
-android/app/build/
-android/captures/
-android/.externalNativeBuild/
-android/.cxx/
+# --- Android (Delphi build output is ignored in android/.gitignore) ---
 *.apk
 *.aab
-*.iml
-.idea/
 
 # --- Editors / OS ---
 .vscode/
