@@ -12,16 +12,16 @@ Thanks for your interest in improving Pouch! 🎉
 
 | Part | Requirements | Quick start |
 |------|--------------|-------------|
-| `extension/` | Firefox 140+, Node.js (for `web-ext`) | `npx web-ext run` |
+| `extension/` | Firefox 140+, Node.js (for `web-ext`) | `npm install && npm start` (repo root) |
 | `server/` | PHP 8.0+ with `pdo_sqlite` | `php -S localhost:8080` |
-| `android/` | Android Studio / JDK 17 | `./gradlew assembleDebug` |
+| `android/` | RAD Studio (Delphi) with the Android platform | open `android/Pouch.dpr` |
 
 ## Pull requests
 
 1. Fork the repository and create a branch from `main` (`feat/short-name` or `fix/short-name`).
 2. Keep changes focused — one feature or fix per pull request.
 3. Make sure checks pass locally:
-   - `npx web-ext lint` in `extension/`
+   - `npm run lint` in the repository root
    - `php -l` on changed PHP files
 4. Update `CHANGELOG.md` under **Unreleased** if the change is user-visible.
 5. Open the pull request and fill in the template.
