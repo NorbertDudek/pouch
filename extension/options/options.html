@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pouch — options</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <section id="list-options">
+    <h1>List</h1>
+    <label for="page-size">Pagination</label>
+    <select id="page-size">
+      <option value="0">Disabled</option>
+      <option value="10">10 items per page</option>
+      <option value="20">20 items per page</option>
+      <option value="50">50 items per page</option>
+    </select>
+    <p class="hint">Saved automatically.</p>
+  </section>
+
+  <form id="form">
+    <h1>Sync with your own server</h1>
+    <p class="hint">
+      Enter the address where the Pouch server is installed (the <code>server</code> directory).
+      Leave it empty to keep links in this browser only.
+    </p>
+
+    <label for="server-url">Server address</label>
+    <input id="server-url" type="url" placeholder="https://example.com/pouch/" autocomplete="off" spellcheck="false">
+    <p id="insecure" class="warning" hidden>
+      Address without https — the token and link list will be sent unencrypted.
+    </p>
+
+    <label for="token">Token</label>
+    <div class="token-row">
+      <input id="token" type="password" autocomplete="off" spellcheck="false">
+      <button id="toggle-token" type="button">Show</button>
+    </div>
+    <p class="hint">The same one set in <code>config.php</code> on the server.</p>
+
+    <div class="buttons">
+      <button id="save" type="submit" class="primary">Save and sync</button>
+    </div>
+
+    <p id="status" role="status"></p>
+  </form>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

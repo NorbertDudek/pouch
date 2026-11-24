@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Package sync server
+        run: |
+          mkdir -p dist
+          cd server && zip -r ../dist/pouch-server-${GITHUB_REF_NAME}.zip . -x 'config.php' '*.sqlite' '*.db'
+
+      - name: Package add-on source (for AMO review)
+        if: ${{ hashFiles('extension/manifest.json') != '' }}
+        run: cd extension && zip -r ../dist/pouch-extension-${GITHUB_REF_NAME}.zip .
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: dist/*

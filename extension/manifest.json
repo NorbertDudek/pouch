@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "Pouch",
+  "version": "0.4.1",
+  "description": "Save pages with one click and come back to them later.",
+  "icons": {
+    "48": "icons/save.svg",
+    "96": "icons/save.svg"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "menus",
+    "alarms"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'"
+  },
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "type": "module"
+  },
+  "action": {
+    "default_icon": "icons/list.svg",
+    "default_title": "Saved links",
+    "default_popup": "list/list.html",
+    "default_area": "navbar"
+  },
+  "page_action": {
+    "default_icon": "icons/save.svg",
+    "default_title": "Save page to Pouch",
+    "show_matches": ["http://*/*", "https://*/*"]
+  },
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Save the current page"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "pouch@norbertdudek.net",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  }
+}

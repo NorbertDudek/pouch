@@ -1,0 +1,425 @@
+﻿object MainForm: TMainForm
+  Left = 0
+  Top = 0
+  Caption = 'Pouch'
+  ClientHeight = 640
+  ClientWidth = 360
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyUp = FormKeyUp
+  DesignerMasterStyle = 0
+  object TabControl: TTabControl
+    Align = Client
+    Size.Width = 360.000000000000000000
+    Size.Height = 640.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = None
+    object TabList: TTabItem
+      IsSelected = True
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'List'
+      object ToolBarList: TToolBar
+        Size.Width = 360.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object LabelTitle: TLabel
+          Align = Contents
+          Size.Width = 360.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'toollabel'
+          TextSettings.HorzAlign = Center
+          Text = 'Pouch'
+        end
+        object ButtonAdd: TSpeedButton
+          Align = Left
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'addtoolbutton'
+          Hint = 'Add link'
+          OnClick = ButtonAddClick
+        end
+        object ButtonSettings: TSpeedButton
+          Align = Right
+          Position.X = 312.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'detailstoolbutton'
+          Hint = 'Sync settings'
+          OnClick = ButtonSettingsClick
+        end
+        object ButtonSync: TSpeedButton
+          Align = Right
+          Position.X = 264.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'refreshtoolbutton'
+          Hint = 'Sync now'
+          OnClick = ButtonSyncClick
+        end
+      end
+      object LabelStatus: TLabel
+        Align = Bottom
+        Margins.Left = 12.000000000000000000
+        Margins.Right = 12.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 604.000000000000000000
+        Size.Width = 336.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, FontColor]
+        TextSettings.Font.Size = 12.000000000000000000
+        TextSettings.WordWrap = False
+        TextSettings.Trimming = Character
+        TabOrder = 2
+      end
+      object ListView: TListView
+        ItemAppearanceClassName = 'TImageListItemBottomDetailRightButtonAppearance'
+        ItemEditAppearanceClassName = 'TImageListItemBottomDetailRightButtonShowCheckAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Align = Client
+        Position.Y = 100.000000000000000000
+        Size.Width = 360.000000000000000000
+        Size.Height = 504.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ItemAppearance.ItemHeight = 64
+        CanSwipeDelete = True
+        PullToRefresh = True
+        OnItemClick = ListViewItemClick
+        OnButtonClick = ListViewButtonClick
+        OnDeletingItem = ListViewDeletingItem
+        OnPullRefresh = ListViewPullRefresh
+      end
+      object SearchEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 4
+        Position.X = 8.000000000000000000
+        Position.Y = 56.000000000000000000
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 4.000000000000000000
+        Size.Width = 344.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Search titles and addresses'
+        OnChangeTracking = SearchEditChangeTracking
+        object SearchClearButton: TClearEditButton
+          Touch.InteractiveGestures = [LongTap]
+          CanFocus = False
+          Cursor = crArrow
+          TextSettings.Trimming = None
+          Size.Width = 28.000000000000000000
+          Size.Height = 36.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+        end
+      end
+      object LabelEmpty: TLabel
+        Align = Center
+        HitTest = False
+        Size.Width = 280.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Center
+        TextSettings.WordWrap = True
+        Text = 'No saved links yet. In the browser choose Share '#8594' Pouch to save a page.'
+        Visible = False
+        TabOrder = 3
+      end
+    end
+    object TabSettings: TTabItem
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 1
+      Text = 'Settings'
+      object ToolBarSettings: TToolBar
+        Size.Width = 360.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object LabelSettingsTitle: TLabel
+          Align = Contents
+          Size.Width = 360.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'toollabel'
+          TextSettings.HorzAlign = Center
+          Text = 'Sync with your own server'
+        end
+        object ButtonBack: TSpeedButton
+          Align = Left
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'backtoolbutton'
+          OnClick = ButtonBackClick
+        end
+      end
+      object ScrollSettings: TVertScrollBox
+        Align = Client
+        Size.Width = 360.000000000000000000
+        Size.Height = 592.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object LabelServer: TLabel
+          Align = Top
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 16.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 16.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Server address'
+          TabOrder = 0
+        end
+        object EditServer: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 1
+          KeyboardType = URL
+          Position.X = 16.000000000000000000
+          Position.Y = 44.000000000000000000
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'https://example.com/pouch/'
+        end
+        object LabelToken: TLabel
+          Align = Top
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 16.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 100.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Token'
+          TabOrder = 2
+        end
+        object EditToken: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 3
+          Password = True
+          Position.X = 16.000000000000000000
+          Position.Y = 128.000000000000000000
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object ButtonSave: TButton
+          Align = Top
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 24.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 192.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'Save and sync'
+          OnClick = ButtonSaveClick
+        end
+        object LabelSettingsInfo: TLabel
+          Align = Top
+          AutoSize = True
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 16.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 252.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 64.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = True
+          TabOrder = 5
+        end
+      end
+    end
+    object TabEdit: TTabItem
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 2
+      Text = 'Edit'
+      object ToolBarEdit: TToolBar
+        Size.Width = 360.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object LabelEditHeader: TLabel
+          Align = Contents
+          Size.Width = 360.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'toollabel'
+          TextSettings.HorzAlign = Center
+          Text = 'Edit link'
+        end
+        object ButtonEditBack: TSpeedButton
+          Align = Left
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'backtoolbutton'
+          OnClick = ButtonEditBackClick
+        end
+      end
+      object ScrollEdit: TVertScrollBox
+        Align = Client
+        Size.Width = 360.000000000000000000
+        Size.Height = 592.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object LabelEditTitle: TLabel
+          Align = Top
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 16.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 16.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Title'
+          TabOrder = 0
+        end
+        object EditTitle: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 1
+          Position.X = 16.000000000000000000
+          Position.Y = 44.000000000000000000
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object LabelEditUrl: TLabel
+          Align = Top
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 16.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 100.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Address'
+          TabOrder = 2
+        end
+        object EditUrl: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 3
+          KeyboardType = URL
+          Position.X = 16.000000000000000000
+          Position.Y = 128.000000000000000000
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object ButtonEditSave: TButton
+          Align = Top
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 24.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 192.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'Save'
+          OnClick = ButtonEditSaveClick
+        end
+        object ButtonEditOpen: TButton
+          Align = Top
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 12.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 248.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 5
+          Text = 'Open in browser'
+          OnClick = ButtonEditOpenClick
+        end
+        object ButtonEditDelete: TButton
+          Align = Top
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 12.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 304.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 6
+          Text = 'Delete'
+          OnClick = ButtonEditDeleteClick
+        end
+        object LabelEditInfo: TLabel
+          Align = Top
+          AutoSize = True
+          Margins.Left = 16.000000000000000000
+          Margins.Top = 16.000000000000000000
+          Margins.Right = 16.000000000000000000
+          Position.X = 16.000000000000000000
+          Position.Y = 364.000000000000000000
+          Size.Width = 328.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = True
+          TabOrder = 7
+        end
+      end
+    end
+  end
+  object SyncTimer: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = SyncTimerTimer
+    Left = 296
+    Top = 560
+  end
+end

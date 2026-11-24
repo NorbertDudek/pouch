@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saved links</title>
+  <link rel="icon" href="../icons/list.svg">
+  <link rel="stylesheet" href="list.css">
+</head>
+<body>
+  <div id="top">
+  <header>
+    <h1>Saved links</h1>
+    <span id="count"></span>
+    <button id="open-options" class="icon-button" type="button" title="Options and sync" aria-label="Options and sync">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h5M11 4.5h3M2 11.5h3M9 11.5h5"/><circle cx="9" cy="4.5" r="1.8"/><circle cx="7" cy="11.5" r="1.8"/></svg>
+    </button>
+    <button id="open-tab" class="icon-button" type="button" title="Open list in a tab" aria-label="Open list in a tab">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 2h5v5M14 2 8 8M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5"/></svg>
+    </button>
+  </header>
+
+  <div class="search-bar">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3.5 3.5"/></svg>
+    <input id="search" type="search" placeholder="Search titles and addresses…" aria-label="Search">
+  </div>
+  </div>
+
+  <ul id="items"></ul>
+  <p id="empty" hidden></p>
+
+  <nav id="pager" aria-label="Pages" hidden>
+    <button id="prev-page" type="button">‹ Previous</button>
+    <span id="page-info"></span>
+    <button id="next-page" type="button">Next ›</button>
+  </nav>
+
+  <div id="toast" role="status" hidden>
+    <span id="toast-text"></span>
+    <button id="toast-undo" type="button">Undo</button>
+  </div>
+
+  <template id="row">
+    <li class="item">
+      <div class="view">
+        <a class="link" target="_blank" rel="noopener noreferrer">
+          <img class="favicon" width="16" height="16" alt="">
+          <span class="text">
+            <span class="title"></span>
+            <span class="url"></span>
+          </span>
+        </a>
+        <span class="actions">
+          <button class="icon-button edit" type="button" title="Edit" aria-label="Edit">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11 2.5 2.5 2.5L5.5 13 2 14l1-3.5z"/></svg>
+          </button>
+          <button class="icon-button delete" type="button" title="Delete" aria-label="Delete">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4h11M6.5 4V2.5h3V4M4 4l.7 9.5h6.6L12 4M6.6 6.5v4.5M9.4 6.5v4.5"/></svg>
+          </button>
+        </span>
+      </div>
+      <form class="editor" hidden>
+        <label>Title<input name="title" type="text" autocomplete="off"></label>
+        <label>Address<input name="url" type="url" autocomplete="off" required></label>
+        <p class="error" hidden></p>
+        <div class="buttons">
+          <button type="submit" class="primary">Save</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </li>
+  </template>
+
+  <script type="module" src="list.js"></script>
+</body>
+</html>

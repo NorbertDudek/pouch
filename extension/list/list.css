@@ -1,0 +1,366 @@
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --fg: #1c1f23;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --hover: #f3f5f7;
+  --accent: #0b7a75;
+  --accent-fg: #ffffff;
+  --danger: #c0392b;
+  --field: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #23232b;
+    --fg: #f1f1f4;
+    --muted: #a0a3ad;
+    --line: #3a3a45;
+    --hover: #2e2e38;
+    --accent: #4fd1c5;
+    --accent-fg: #10201f;
+    --danger: #ff8a7a;
+    --field: #1b1b22;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Default: popup dimensions. In a tab, html gets the .tab class. */
+body {
+  margin: 0;
+  width: 420px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html.tab body {
+  width: auto;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px 16px 48px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 12px 8px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+html.tab h1 {
+  font-size: 22px;
+}
+
+#count {
+  flex: 1;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+html.tab #open-tab {
+  display: none;
+}
+
+/* Header and search bar; in a tab they stay pinned while the page scrolls. */
+#top {
+  background: var(--bg);
+}
+
+html.tab #top {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.search-bar {
+  position: relative;
+  margin: 0 12px 8px;
+}
+
+.search-bar svg {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  width: 15px;
+  height: 15px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+#search {
+  display: block;
+  width: 100%;
+  padding-left: 30px;
+}
+
+#pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+#pager[hidden] {
+  display: none;
+}
+
+#pager button {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#pager button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+#page-info {
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+input {
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--field);
+  color: var(--fg);
+  font: inherit;
+}
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+#items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 460px;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+}
+
+html.tab #items {
+  max-height: none;
+  overflow: visible;
+}
+
+.item {
+  border-bottom: 1px solid var(--line);
+}
+
+.view {
+  display: flex;
+  align-items: center;
+}
+
+.view[hidden] {
+  display: none;
+}
+
+.view:hover,
+.view:focus-within {
+  background: var(--hover);
+}
+
+.link {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 4px 8px 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.favicon {
+  flex: none;
+  margin-top: 2px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title,
+.url {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.url {
+  color: var(--muted);
+  font-size: 11.5px;
+}
+
+.actions {
+  display: flex;
+  flex: none;
+  padding-right: 6px;
+  opacity: 0;
+}
+
+.view:hover .actions,
+.view:focus-within .actions {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .actions {
+    opacity: 1;
+  }
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background: var(--line);
+  color: var(--fg);
+}
+
+.icon-button.delete:hover {
+  color: var(--danger);
+}
+
+.icon-button svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.editor {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px 12px;
+  background: var(--hover);
+}
+
+.editor[hidden] {
+  display: none;
+}
+
+.editor label {
+  display: grid;
+  gap: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.editor input {
+  font-size: 14px;
+}
+
+.error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.buttons button,
+#toast button {
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.buttons .primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+#empty {
+  margin: 0;
+  padding: 28px 16px;
+  color: var(--muted);
+  text-align: center;
+}
+
+#toast {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 8px 8px 8px 12px;
+  border-radius: 8px;
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 25%);
+}
+
+#toast[hidden] {
+  display: none;
+}
+
+#toast-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

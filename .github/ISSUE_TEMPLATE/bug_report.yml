@@ -1,0 +1,52 @@
+name: 🐞 Bug report
+description: Something doesn't work as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a bug! Please fill in the details below.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Firefox add-on
+        - Sync server
+        - Android app
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Pouch version
+      placeholder: e.g. 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Firefox / Android / PHP version and OS
+      placeholder: e.g. Firefox 145 on Windows 11, PHP 8.3
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open …
+        2. Click …
+        3. See …
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: Browser console output, server error log or screenshots. **Remove your sync token!**

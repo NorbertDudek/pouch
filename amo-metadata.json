@@ -1,0 +1,12 @@
+{
+  "categories": ["bookmarks"],
+  "summary": {
+    "en-US": "Save any page with one click and come back to it later. A simple read-later list that stays in your browser, with optional sync to your own server."
+  },
+  "description": {
+    "en-US": "Pouch is a lightweight read-later list for Firefox.\n\n<b>Features</b>\n<ul><li>Save the current page with one click on the address bar icon or with <code>Alt+Shift+S</code>.</li><li>The icon changes once the page is saved, so you always know what is already on your list.</li><li>Right-click any link and choose <i>Save link to Pouch</i>.</li><li>Open your list from the toolbar: search titles and addresses, edit or delete entries, and undo a deletion.</li><li>Open the list in a full tab when it gets long.</li><li>Works in light and dark themes.</li></ul>\n\n<b>Privacy</b>\nBy default your links are stored only in this browser. Nothing is sent to the developer or any third party.\n\nOptionally, you can sync your list between devices using your own server: a small PHP script (PHP 8.0+ with SQLite) that you host yourself. Enter its address and a secret token in the add-on options. Links are then sent only to the server you configured.\n\nPouch is open source and released under the Mozilla Public License 2.0."
+  },
+  "version": {
+    "license": "MPL-2.0"
+  }
+}

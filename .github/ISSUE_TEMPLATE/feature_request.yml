@@ -1,0 +1,30 @@
+name: 💡 Feature request
+description: Suggest an idea for Pouch
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Firefox add-on
+        - Sync server
+        - Android app
+        - General
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would it solve?
+      placeholder: I'm always frustrated when …
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
