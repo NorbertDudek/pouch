@@ -55,6 +55,7 @@ No account, no cloud, no tracking — your links stay in your browser, or on a s
 **Android app**
 
 - 📲 **Share → Pouch** from any browser or app; the URL is extracted from shared text.
+- 🔎 Search by title or address, ✏️ edit entries (duplicates are rejected).
 - 👆 Tap to open, swipe to delete, **+** to add manually (suggests the URL from the clipboard).
 - 🔄 Same server and token as the add-on; pull-to-refresh syncs immediately.
 
@@ -69,7 +70,7 @@ or download the signed `.xpi` from the [latest release](https://github.com/Norbe
 
 ### Android app
 
-Download the APK from the [latest release](https://github.com/NorbertDudek/pouch/releases/latest).
+The app is built with Delphi (FireMonkey) — see [Development](#android-app-1) to build the APK yourself.
 Sync on Android requires a server reachable over **HTTPS**.
 
 ### Sync server (optional)
@@ -101,7 +102,7 @@ For extra safety you can move it outside the public web root.
 pouch/
 ├── extension/   Firefox add-on (Manifest V3, vanilla JS)
 ├── server/      Optional sync server (PHP 8.0+, SQLite)
-├── android/     Android app
+├── android/     Android app (Delphi / FireMonkey)
 └── docs/        Logo and screenshots
 ```
 
@@ -110,10 +111,10 @@ pouch/
 ### Firefox add-on
 
 ```bash
-cd extension
-npx web-ext run      # launch Firefox with the add-on loaded
-npx web-ext lint     # validate the manifest and code
-npx web-ext build    # create a .zip in web-ext-artifacts/
+npm install          # installs web-ext (run in the repository root)
+npm start            # launch Firefox with the add-on loaded
+npm run lint         # validate the manifest and code
+npm run build        # create dist/pouch-<version>.xpi
 ```
 
 Or load it manually: `about:debugging` → **This Firefox** → **Load Temporary Add-on…** → select `extension/manifest.json`.
@@ -128,16 +129,11 @@ php -S localhost:8080
 
 ### Android app
 
-Open the `android/` folder in Android Studio, or build from the command line:
-
-```bash
-cd android
-./gradlew assembleDebug
-```
+Open `android/Pouch.dpr` in RAD Studio (Delphi, FireMonkey), select the **Android 64-bit** target and build.
+Details: [android/README.md](android/README.md).
 
 ## Roadmap
 
-- [ ] Search and editing in the Android app
 - [ ] Translations of the user interface
 - [ ] Tags / folders
 
