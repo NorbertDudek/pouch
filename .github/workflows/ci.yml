@@ -12,14 +12,16 @@ jobs:
   extension:
     name: Firefox add-on
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('extension/manifest.json') != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+      - name: Install web-ext
+        run: npm ci
       - name: web-ext lint
-        run: npx --yes web-ext lint --source-dir extension --self-hosted
+        run: npm run lint
 
   server:
     name: Sync server
@@ -31,22 +33,7 @@ jobs:
           php-version: '8.0'
           extensions: pdo_sqlite
       - name: PHP syntax check
-        run: |
-          files=$(find server -name '*.php' 2>/dev/null)
-          if [ -z "$files" ]; then echo "No PHP files"; exit 0; fi
-          for f in $files; do php -l "$f"; done
+        run: find server -name '*.php' -print0 | xargs -0 -n1 php -l
 
-  android:
-    name: Android app
-    runs-on: ubuntu-latest
-    if: ${{ hashFiles('android/gradlew') != '' }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-      - uses: gradle/actions/setup-gradle@v4
-      - name: Build debug APK
-        working-directory: android
-        run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
+# The Android app (android/) is built with Delphi / RAD Studio (FireMonkey),
+# which is not available on GitHub-hosted runners - build it locally.
